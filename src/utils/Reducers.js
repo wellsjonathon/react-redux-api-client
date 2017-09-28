@@ -45,7 +45,9 @@ const bookList = (state = [], action) => {
 const showModal = (state = false, action) => {
     switch (action.type) {
         case TOGGLE_MODAL:
-            return { state: !state };
+            console.log("Incoming State: " + state)
+            console.log("!State: " + !state)
+            return !state;
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { toggleModal } from './../utils/Actions';
-import AddBookBtn from './../components/AddBookBtn';
+import AddBookModal from './../components/AddBookModal';
 
 const mapStateToProps = state => {
     return {
@@ -10,19 +10,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: () => {
+        onCancel: () => {
             dispatch(toggleModal())
         }
     }
 }
 
-const AddBookBtnContainer = connect(
+const AddBookModalContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddBookBtn)
+)(AddBookModal)
 
-export default AddBookBtnContainer;
-
-// addBook: (title, author, genre, year) => {
-//     dispatch(addBook(title, author, genre, year))
-// }
+export default AddBookModalContainer;
