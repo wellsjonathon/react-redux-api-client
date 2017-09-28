@@ -26,9 +26,11 @@ class BookList extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.props.books.map(book => {
-                                return <BookRow book={book} onClick={this.props.onClick} key={book.id}/>
-                            })
+                            (!this.props.books.includes(null))
+                            ? ( this.props.books.map(book => {
+                                    return <BookRow book={book} onClick={this.props.onClick} key={book.id}/>
+                                }))
+                            : null
                         }
                     </tbody>
                 </table>

@@ -11,10 +11,11 @@ import {addBook} from './utils/Actions';
 
 let store = createStore(bookApp);
 
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
+store.dispatch(addBook('Havana Storm', 'Clive Cussler', 'Adventure', '2014'));
+store.dispatch(addBook('Dune', 'Frank Herbert', 'Sci-fi', '1965'));
+store.dispatch(addBook('The Mote in Gods Eye', 'Larry Niven', 'Sci-fi', '1974'));
+store.dispatch(addBook('Foundation', 'Isaac Asimov', 'Sci-fi', '1951'));
+store.dispatch(addBook('Ringworld', 'Larry Niven', 'Sci-fi', '1970'));
 
 ReactDOM.render(
     <Provider store={store}>
@@ -22,3 +23,15 @@ ReactDOM.render(
     </Provider>, 
     document.getElementById('root'));
 registerServiceWorker();
+
+if (module.hot) {
+    module.hot.accept('./components/App', () => {
+        const NextApp = require('./components/App').default;
+        ReactDOM.render(
+            <Provider store={store}>
+                <NextApp />
+            </Provider>,
+            document.getElementById('root')
+        )
+    })
+}

@@ -4,6 +4,7 @@ import { uuid } from './Utils';
 export const SET_FILTER = 'SET_FILTER';
 export const CHANGE_AVAILABILITY = 'CHANGE_AVAILABILITY';
 export const ADD_BOOK = 'ADD_BOOK';
+export const SEARCH_BOOK_LIST = 'SEARCH_BOOK_LIST';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 /* Action Creators */
@@ -31,6 +32,13 @@ export const addBook = (title, author, genre, pubyear) => {
         genre,
         pubyear,
         available: 1
+    }
+}
+
+export const searchBookList = query => {
+    return {
+        type: SEARCH_BOOK_LIST,
+        query
     }
 }
 

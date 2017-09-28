@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { SET_FILTER,
          CHANGE_AVAILABILITY,
          ADD_BOOK,
+         SEARCH_BOOK_LIST,
          TOGGLE_MODAL } from './Actions';
 import { FILTER_ALL } from './Filters';
 
@@ -34,6 +35,15 @@ const bookList = (state = [], action) => {
                     available: action.available
                 }
             ]
+        case SEARCH_BOOK_LIST:
+            return state.map(book => 
+                (book.title.includes(action.query) || 
+                 book.author.includes(action.query) || 
+                 book.genre.includes(action.query) || 
+                 book.pubyear.includes(action.query))
+                ? book
+                : null
+            );
         default:
             return state;
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchBar from './SearchBar';
+import SearchBarContainer from './../containers/SearchBarContainer';
 import AddBookBtnContainer from './../containers/AddBookBtnContainer';
 import AddBookModalContainer from './../containers/AddBookModalContainer';
 import BookListContainer from './../containers/BookListContainer';
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className='AppWrapper'>
         <div className="App">
-          <SearchBar />
+          <SearchBarContainer />
           <AddBookBtnContainer />
           <BookListContainer />
         </div>
