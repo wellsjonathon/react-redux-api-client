@@ -5,9 +5,6 @@ import { SET_FILTER,
          TOGGLE_MODAL } from './Actions';
 import { FILTER_ALL } from './Filters';
 
-// TEMPORARY, REMOVE ONCE BOOK LIST IS NO LONGER HARDCODED
-import { uuid } from './Utils';
-
 /* Reducers */
 const filter = (state = FILTER_ALL, action) => {
     switch (action.type) {
@@ -45,8 +42,6 @@ const bookList = (state = [], action) => {
 const showModal = (state = false, action) => {
     switch (action.type) {
         case TOGGLE_MODAL:
-            console.log("Incoming State: " + state)
-            console.log("!State: " + !state)
             return !state;
         default:
             return state;

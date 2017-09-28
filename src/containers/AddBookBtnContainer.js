@@ -22,7 +22,3 @@ const AddBookBtnContainer = connect(
 )(AddBookBtn)
 
 export default AddBookBtnContainer;
-
-// addBook: (title, author, genre, year) => {
-//     dispatch(addBook(title, author, genre, year))
-// }

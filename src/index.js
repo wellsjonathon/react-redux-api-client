@@ -15,18 +15,6 @@ store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
 store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
 store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
 store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
-store.dispatch(addBook('Book', 'Author', 'Genre', '1990'));
 
 ReactDOM.render(
     <Provider store={store}>
