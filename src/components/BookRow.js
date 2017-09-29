@@ -8,7 +8,7 @@ class BookRow extends Component {
                 <td className='BookRow__title'>{book.title}</td>
                 <td className='BookRow__author'>{book.author}</td>
                 <td className='BookRow__genre'>{book.genre}</td>
-                <td className='BookRow__year'>{book.pubyear}</td>
+                <td className='BookRow__year'>{book.published}</td>
                 <td className='BookRow__available'>
                     {
                         (book.available) ?

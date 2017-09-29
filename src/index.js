@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import './styles/index.css';
 import App from './components/App';
 import bookApp from './utils/Reducers';
 import registerServiceWorker from './registerServiceWorker';
 
-import {addBook} from './utils/Actions';
+import { addBook, fetchAllBooks } from './utils/Actions';
 
-let store = createStore(bookApp);
+let store = createStore(bookApp, applyMiddleware(thunkMiddleware));
 
-store.dispatch(addBook('Havana Storm', 'Clive Cussler', 'Adventure', '2014'));
-store.dispatch(addBook('Dune', 'Frank Herbert', 'Sci-fi', '1965'));
-store.dispatch(addBook('The Mote in Gods Eye', 'Larry Niven', 'Sci-fi', '1974'));
-store.dispatch(addBook('Foundation', 'Isaac Asimov', 'Sci-fi', '1951'));
-store.dispatch(addBook('Ringworld', 'Larry Niven', 'Sci-fi', '1970'));
+store.dispatch(fetchAllBooks());
+
+// store.dispatch(addBook('Havana Storm', 'Clive Cussler', 'Adventure', '2014'));
+// store.dispatch(addBook('Dune', 'Frank Herbert', 'Sci-fi', '1965'));
+// store.dispatch(addBook('The Mote in Gods Eye', 'Larry Niven', 'Sci-fi', '1974'));
+// store.dispatch(addBook('Foundation', 'Isaac Asimov', 'Sci-fi', '1951'));
+// store.dispatch(addBook('Ringworld', 'Larry Niven', 'Sci-fi', '1970'));
 
 ReactDOM.render(
     <Provider store={store}>

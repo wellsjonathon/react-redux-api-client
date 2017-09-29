@@ -6,6 +6,10 @@ import BookListContainer from './../containers/BookListContainer';
 import './../styles/App.css';
 
 class App extends Component {
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <div className='AppWrapper'>

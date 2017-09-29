@@ -1,0 +1,1 @@
+export const url_getAllBooks = '/api/books';

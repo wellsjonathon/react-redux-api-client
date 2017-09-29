@@ -1,10 +1,16 @@
 import { combineReducers } from 'redux';
-import { SET_FILTER,
+import axios from 'axios';
+import { REQUEST_ALL_BOOKS,
+         RECEIVE_ALL_BOOKS,
+         SET_FILTER,
          CHANGE_AVAILABILITY,
          ADD_BOOK,
          SEARCH_BOOK_LIST,
          TOGGLE_MODAL } from './Actions';
+import { fetchAllBooksIfNeeded } from './Actions';
 import { FILTER_ALL } from './Filters';
+import { url_getAllBooks } from './Routes';
+import { uuid } from './Utils';
 
 /* Reducers */
 const filter = (state = FILTER_ALL, action) => {
@@ -18,6 +24,10 @@ const filter = (state = FILTER_ALL, action) => {
 
 const bookList = (state = [], action) => {
     switch (action.type) {
+        case REQUEST_ALL_BOOKS:
+            return fetchAllBooksIfNeeded();
+        case RECEIVE_ALL_BOOKS:
+            return action.bookList;
         case CHANGE_AVAILABILITY:
             return state.map(book => 
                 (book.id === action.id)
@@ -31,7 +41,7 @@ const bookList = (state = [], action) => {
                     title: action.title,
                     author: action.author,
                     genre: action.genre,
-                    pubyear: action.pubyear,
+                    published: action.published,
                     available: action.available
                 }
             ]
@@ -40,7 +50,7 @@ const bookList = (state = [], action) => {
                 (book.title.includes(action.query) || 
                  book.author.includes(action.query) || 
                  book.genre.includes(action.query) || 
-                 book.pubyear.includes(action.query))
+                 book.published.includes(action.query))
                 ? book
                 : null
             );
