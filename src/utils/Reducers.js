@@ -6,7 +6,8 @@ import { GET_BOOKS_REQUEST,
          ADD_BOOK_REQUEST,
          ADD_BOOK_SUCCESS,
          SET_FILTER,
-         SEARCH_BOOK_LIST,
+         SEARCH_BOOKLIST_REQUEST,
+         SEARCH_BOOKLIST_RECEIVED,
          TOGGLE_MODAL } from './Actions';
 import { FILTER_ALL } from './Filters';
 
@@ -30,6 +31,7 @@ const bookList = (
     switch (action.type) {
         case GET_BOOKS_REQUEST:
         case ADD_BOOK_REQUEST:
+        case SEARCH_BOOKLIST_REQUEST:
             return {
                 ...state,
                 isFetching: true
@@ -47,15 +49,12 @@ const bookList = (
                 ...state,
                 books: action.bookList
             }
-        case SEARCH_BOOK_LIST:
-            return state.map(book => 
-                (book.title.includes(action.query) || 
-                    book.author.includes(action.query) || 
-                    book.genre.includes(action.query) || 
-                    book.pubyear.includes(action.query))
-                ? book
-                : null
-            )
+        case SEARCH_BOOKLIST_RECEIVED:
+            return {
+                ...state,
+                isFetching: false,
+                books: action.results
+            }
         default:
             return state;
     }

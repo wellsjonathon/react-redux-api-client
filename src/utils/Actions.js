@@ -15,8 +15,11 @@ export const ADD_BOOK_REQUEST = 'ADD_BOOK_REQUEST';
 export const ADD_BOOK_SUCCESS = 'ADD_BOOK_SUCCESS';
 export const ADD_BOOK_ERROR = 'ADD_BOOK_ERROR';
 
+export const SEARCH_BOOKLIST_REQUEST = 'SEARCH_BOOKLIST_REQUEST';
+export const SEARCH_BOOKLIST_RECEIVED = 'SEARCH_BOOKLIST_RECEIVED';
+export const SEARCH_BOOKLIST_ERROR = 'SEARCH_BOOKLIST_ERROR';
+
 export const SET_FILTER = 'SET_FILTER';
-export const SEARCH_BOOK_LIST = 'SEARCH_BOOK_LIST';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 /* Action Creators */
@@ -59,7 +62,7 @@ export const setFilter = filter => {
 
 export const searchBookList = query => {
     return {
-        type: SEARCH_BOOK_LIST,
+        type: SEARCH_BOOKLIST_REQUEST,
         query
     }
 }
