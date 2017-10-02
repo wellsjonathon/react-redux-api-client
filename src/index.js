@@ -6,13 +6,14 @@ import { createStore, applyMiddleware } from 'redux';
 import './styles/index.css';
 import App from './components/App';
 import bookApp from './utils/Reducers';
+import dataServiceMiddleware from './middleware/DataService';
 import registerServiceWorker from './registerServiceWorker';
 
-import { addBook, fetchAllBooks } from './utils/Actions';
+import { requestBooks } from './utils/Actions';
 
-let store = createStore(bookApp, applyMiddleware(thunkMiddleware));
+let store = createStore(bookApp, applyMiddleware(thunkMiddleware, dataServiceMiddleware));
 
-store.dispatch(fetchAllBooks());
+store.dispatch(requestBooks());
 
 // store.dispatch(addBook('Havana Storm', 'Clive Cussler', 'Adventure', '2014'));
 // store.dispatch(addBook('Dune', 'Frank Herbert', 'Sci-fi', '1965'));

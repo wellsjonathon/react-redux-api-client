@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BookList from './../components/BookList';
-import { changeAvailability } from './../utils/Actions';
+import { checkoutBook, returnBook } from './../utils/Actions';
 import { FILTER_ALL, 
          FILTER_AVAILABLE,
          FILTER_UNAVAILABLE } from './../utils/Filters';
@@ -20,14 +20,16 @@ const getBooks = (books, filter) => {
 
 const mapStateToProps = state => {
     return {
-        books: getBooks(state.bookList, state.filter)
+        books: getBooks(state.bookList.books, state.filter)
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: id => {
-            dispatch(changeAvailability(id))
+        onClick: (available, id) => {
+            (available === 1)
+            ? dispatch(checkoutBook(id))
+            : dispatch(returnBook(id))
         }
     }
 }

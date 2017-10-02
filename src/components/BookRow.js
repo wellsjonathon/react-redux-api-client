@@ -12,11 +12,11 @@ class BookRow extends Component {
                 <td className='BookRow__available'>
                     {
                         (book.available) ?
-                            <button className='BookRow__statusBtn--available' onClick={() => this.props.onClick(book.id)}>
+                            <button className='BookRow__statusBtn--available' onClick={() => this.props.onClick(book.available, book.id)}>
                                 <span>Check-out</span>
                             </button> :
-                            <button className='BookRow__statusBtn--unavailable' onClick={() => this.props.onClick(book.id)}>
-                                <span>Check-in</span>
+                            <button className='BookRow__statusBtn--unavailable' onClick={() => this.props.onClick(book.available, book.id)}>
+                                <span>Return</span>
                             </button>
                     }
                 </td>

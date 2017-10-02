@@ -1,16 +1,12 @@
 import { combineReducers } from 'redux';
-import axios from 'axios';
-import { REQUEST_ALL_BOOKS,
-         RECEIVE_ALL_BOOKS,
+import { GET_BOOKS_RECEIVED,
+         CHECKOUT_BOOK_SUCCESS,
+         RETURN_BOOK_SUCCESS,
          SET_FILTER,
-         CHANGE_AVAILABILITY,
          ADD_BOOK,
          SEARCH_BOOK_LIST,
          TOGGLE_MODAL } from './Actions';
-import { fetchAllBooksIfNeeded } from './Actions';
 import { FILTER_ALL } from './Filters';
-import { url_getAllBooks } from './Routes';
-import { uuid } from './Utils';
 
 /* Reducers */
 const filter = (state = FILTER_ALL, action) => {
@@ -22,18 +18,29 @@ const filter = (state = FILTER_ALL, action) => {
     }
 }
 
-const bookList = (state = [], action) => {
+const bookList = (
+    state = {
+        isFetching: false,
+        didInvalidate: false,
+        books: []
+    }, 
+    action) => {
     switch (action.type) {
-        case REQUEST_ALL_BOOKS:
-            return fetchAllBooksIfNeeded();
-        case RECEIVE_ALL_BOOKS:
-            return action.bookList;
-        case CHANGE_AVAILABILITY:
-            return state.map(book => 
-                (book.id === action.id)
-                ? {...book, available: !book.available}
-                : book
-            );
+        case GET_BOOKS_RECEIVED:
+            return {
+                ...state,
+                books: action.bookList
+            }
+        case CHECKOUT_BOOK_SUCCESS:
+            return {
+                ...state,
+                books: action.bookList
+            }
+        case RETURN_BOOK_SUCCESS:
+            return {
+                ...state,
+                books: action.bookList
+            }
         case ADD_BOOK:
             return [
                 ...state, {
@@ -48,12 +55,12 @@ const bookList = (state = [], action) => {
         case SEARCH_BOOK_LIST:
             return state.map(book => 
                 (book.title.includes(action.query) || 
-                 book.author.includes(action.query) || 
-                 book.genre.includes(action.query) || 
-                 book.published.includes(action.query))
+                    book.author.includes(action.query) || 
+                    book.genre.includes(action.query) || 
+                    book.published.includes(action.query))
                 ? book
                 : null
-            );
+            )
         default:
             return state;
     }

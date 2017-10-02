@@ -1,59 +1,43 @@
-import axios from 'axios';
-import { uuid } from './Utils';
-import { url_getAllBooks } from './Routes';
-
 /* Actions */
+export const INVALIDATE_BOOKLIST = 'INVALIDATE_BOOKLIST';
 export const REQUEST_ALL_BOOKS = 'REQUEST_ALL_BOOKS';
 export const RECEIVE_ALL_BOOKS = 'RECEIVE_ALL_BOOKS';
+
+export const GET_BOOKS_REQUEST = 'GET_BOOKS_REQUEST';
+export const GET_BOOKS_RECEIVED = 'GET_BOOKS_RECEIVED';
+export const GET_BOOKS_ERROR = 'GET_BOOKS_ERROR';
+
+export const CHECKOUT_BOOK_REQUEST = 'CHECKOUT_BOOK_REQUEST';
+export const CHECKOUT_BOOK_SUCCESS = 'CHECKOUT_BOOK_SUCCESS';
+export const CHECKOUT_BOOK_ERROR = 'CHECKOUT_BOOK_ERROR';
+
+export const RETURN_BOOK_REQUEST = 'RETURN_BOOK_REQUEST';
+export const RETURN_BOOK_SUCCESS = 'RETURN_BOOK_SUCCESS';
+export const RETURN_BOOK_ERROR = 'RETURN_BOOK_ERROR';
+
 export const SET_FILTER = 'SET_FILTER';
-export const CHANGE_AVAILABILITY = 'CHANGE_AVAILABILITY';
 export const ADD_BOOK = 'ADD_BOOK';
 export const SEARCH_BOOK_LIST = 'SEARCH_BOOK_LIST';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 /* Action Creators */
-const requestAllBooks = () => {
+export const requestBooks = () => {
     return {
-        type: REQUEST_ALL_BOOKS
+        type: GET_BOOKS_REQUEST
     }
 }
 
-const receiveAllBooks = (json) => {
+export const checkoutBook = id => {
     return {
-        type: RECEIVE_ALL_BOOKS,
-        bookList: json.data.map(book => {book.id = uuid(); return book}),
-        receivedAt: Date.now()
+        type: CHECKOUT_BOOK_REQUEST,
+        id
     }
 }
 
-export const fetchAllBooks = () => {
-    return dispatch => {
-        // dispatch(requestAllBooks())
-        return axios.get('http://SKREGIA675203P:4300' + url_getAllBooks)
-                    .then(response => {
-                        dispatch(receiveAllBooks(response))
-                    })
-    }
-}
-
-const shouldfetchAllBooks = state => {
-    const books = state.bookList;
-    if (!books) {
-        return true;
-    } else if (books.isFetching) {
-        return false;
-    } else {
-        return books.didInvalidate;
-    }
-}
-
-export const fetchAllBooksIfNeeded = () => {
-    return (dispatch, getState) => {
-        // if (shouldfetchAllBooks(getState())) {
-            return dispatch(fetchAllBooks());
-        // } else {
-        //     return Promise.resolve();
-        // }
+export const returnBook = id => {
+    return {
+        type: RETURN_BOOK_REQUEST,
+        id
     }
 }
 
@@ -64,18 +48,9 @@ export const setFilter = filter => {
     };
 }
 
-export const changeAvailability = id => {
-    return {
-        type: CHANGE_AVAILABILITY,
-        id
-    }
-}
-
 export const addBook = (title, author, genre, published) => {
-    let id = uuid();
     return {
         type: ADD_BOOK,
-        id,
         title,
         author,
         genre,
