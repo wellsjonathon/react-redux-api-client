@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import { GET_BOOKS_RECEIVED,
+import { GET_BOOKS_REQUEST,
+         GET_BOOKS_RECEIVED,
          CHECKOUT_BOOK_SUCCESS,
          RETURN_BOOK_SUCCESS,
+         ADD_BOOK_REQUEST,
+         ADD_BOOK_SUCCESS,
          SET_FILTER,
-         ADD_BOOK,
          SEARCH_BOOK_LIST,
          TOGGLE_MODAL } from './Actions';
 import { FILTER_ALL } from './Filters';
@@ -26,38 +28,31 @@ const bookList = (
     }, 
     action) => {
     switch (action.type) {
-        case GET_BOOKS_RECEIVED:
+        case GET_BOOKS_REQUEST:
+        case ADD_BOOK_REQUEST:
             return {
                 ...state,
+                isFetching: true
+            }
+        case GET_BOOKS_RECEIVED:
+        case ADD_BOOK_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
                 books: action.bookList
             }
         case CHECKOUT_BOOK_SUCCESS:
-            return {
-                ...state,
-                books: action.bookList
-            }
         case RETURN_BOOK_SUCCESS:
             return {
                 ...state,
                 books: action.bookList
             }
-        case ADD_BOOK:
-            return [
-                ...state, {
-                    id: action.id,
-                    title: action.title,
-                    author: action.author,
-                    genre: action.genre,
-                    published: action.published,
-                    available: action.available
-                }
-            ]
         case SEARCH_BOOK_LIST:
             return state.map(book => 
                 (book.title.includes(action.query) || 
                     book.author.includes(action.query) || 
                     book.genre.includes(action.query) || 
-                    book.published.includes(action.query))
+                    book.pubyear.includes(action.query))
                 ? book
                 : null
             )

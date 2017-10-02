@@ -7,7 +7,10 @@ import { GET_BOOKS_REQUEST,
          CHECKOUT_BOOK_ERROR,
          RETURN_BOOK_REQUEST,
          RETURN_BOOK_SUCCESS,
-         RETURN_BOOK_ERROR } from './../utils/Actions';
+         RETURN_BOOK_ERROR,
+         ADD_BOOK_REQUEST,
+         ADD_BOOK_SUCCESS,
+         ADD_BOOK_ERROR } from './../utils/Actions';
 
 const baseURL = 'http://SKREGIA675203P:4300';
 
@@ -77,6 +80,27 @@ const dataServiceMiddleware = store => next => action => {
                         err
                     })
                 });
+            break;
+        case ADD_BOOK_REQUEST:
+            axios
+                .post(baseURL + '/api/insert', {
+                    title: action.title,
+                    author: action.author,
+                    genre: action.genre,
+                    pubyear: action.pubyear
+                })
+                .then(res => {
+                    next({
+                        type: ADD_BOOK_SUCCESS,
+                        bookList: res.data
+                    })
+                })
+                .catch(err => {
+                    next({
+                        type: ADD_BOOK_ERROR,
+                        err
+                    })
+                })
             break;
         default:
             break;
